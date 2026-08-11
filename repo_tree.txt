@@ -1,0 +1,46 @@
+.
+├── .gitignore
+├── data
+│   ├── interim
+│   ├── processed
+│   └── raw
+│       └── CMAPSSData
+│           ├── Damage Propagation Modeling.pdf
+│           ├── readme.txt
+│           ├── RUL_FD001.txt
+│           ├── RUL_FD002.txt
+│           ├── RUL_FD003.txt
+│           ├── RUL_FD004.txt
+│           ├── test_FD001.txt
+│           ├── test_FD002.txt
+│           ├── test_FD003.txt
+│           ├── test_FD004.txt
+│           ├── train_FD001.txt
+│           ├── train_FD002.txt
+│           ├── train_FD003.txt
+│           └── train_FD004.txt
+├── documents
+│   ├── ~$active_recall.pptx
+│   ├── active_recall.docx
+│   └── active_recall.pptx
+├── notebooks
+│   ├── .ipynb_checkpoints
+│   │   └── eda-checkpoint.ipynb
+│   └── eda.ipynb
+├── pyproject.toml
+├── README.md
+├── repo_tree.txt
+├── reports
+│   └── figures
+├── requirements-core.txt
+├── requirements-mlops.txt
+├── src
+│   ├── __init__.py
+│   ├── config.py
+│   ├── data
+│   ├── features
+│   ├── models
+│   └── paths.py
+└── tests
+
+16 directories, 28 files
