@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+
+# Testing / development caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Microsoft Office temporary/lock files
+~$*
+
+# macOS metadata
+.DS_Store
+
+# Environment variables / secrets
+.env
+.env.*
+
+# MLflow local artifacts
+mlruns/
+mlartifacts/

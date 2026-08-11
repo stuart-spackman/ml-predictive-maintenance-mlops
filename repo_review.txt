@@ -1,0 +1,41 @@
+========== .gitignore ==========
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Microsoft Office temporary/lock files
+~$*
+
+# macOS metadata
+.DS_Store
+
+========== pyproject.toml ==========
+
+========== requirements-core.txt ==========
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+seaborn
+jupyterlab
+ipykernel
+joblib
+tqdm
+python-dotenv
+pyyaml
+
+========== requirements-mlops.txt ==========
+mlflow
+fastapi
+uvicorn[standard]
+pydantic
+pytest
+httpx
+evidently
+prometheus-client
+
+========== README.md ==========
+
+========== src/predictive_maintenance/config.py ==========
+
+========== src/predictive_maintenance/paths.py ==========
