@@ -1,0 +1,21 @@
+{
+  "dataset": "FD001",
+  "phase_1_complete": true,
+  "selected_candidate": "candidate_A_current_leader",
+  "model_family": "RandomForest",
+  "capacity_setting": "max_depth=5",
+  "n_features": 36,
+  "target": "uncapped RUL",
+  "weighting": "ordinary row weighting",
+  "selection_metric": "pooled grouped-CV OOF RMSE",
+  "development_pooled_oof_rmse": 37.439092445905096,
+  "development_pooled_oof_mae": 26.350960414880262,
+  "official_test_row_level_rmse": 41.34185107076347,
+  "official_test_row_level_mae": 31.02209101393462,
+  "official_test_endpoint_rmse": 25.91401662256538,
+  "official_test_endpoint_mae": 19.061923112994936,
+  "official_test_engines": 100,
+  "final_model_sha256": "bb5825d198d6eda27d1e720e67837a469ac7d126dfdd2e832bd9b5374514596b",
+  "test_labels_revealed_only_after_prediction": true,
+  "post_test_phase_1_tuning_allowed": false
+}

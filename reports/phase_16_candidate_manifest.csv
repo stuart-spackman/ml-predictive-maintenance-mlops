@@ -1,0 +1,4 @@
+candidate_id,description,representation,model_family,capacity_setting,n_features,sensor_6_included,target,weighting
+candidate_A_current_leader,Current Phase 1.5 leading configuration,Matched temporal reference,RandomForest,max_depth=5,36,True,uncapped RUL,ordinary row weighting
+candidate_B_sensor6_ablated,Current Phase 1.5 leader with Sensor 6 removed,Matched temporal reference,RandomForest,max_depth=5,35,False,uncapped RUL,ordinary row weighting
+candidate_C_family_alternative,best linear-family alternative,Matched temporal reference,Ridge,alpha=100,36,True,uncapped RUL,ordinary row weighting
