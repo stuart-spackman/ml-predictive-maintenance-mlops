@@ -19,6 +19,9 @@ from typing import Any
 
 import joblib
 
+from predictive_maintenance.inference.errors import (
+    InferenceArtifactError,
+)
 
 # ------------------------------------------------------------
 # Project artifact locations
@@ -52,12 +55,13 @@ FINAL_FIT_RECORD_PATH = (
 )
 
 
-class ArtifactIntegrityError(RuntimeError):
+class ArtifactIntegrityError(
+    InferenceArtifactError
+):
     """
     Raised when a frozen Phase 1 artifact is missing, malformed,
-    or fails an integrity check.
+    inconsistent, or fails integrity verification.
     """
-
 
 @dataclass(frozen=True)
 class LoadedModelArtifacts:

@@ -28,12 +28,17 @@ from predictive_maintenance.inference.schema import (
     REQUIRED_RAW_HISTORY_COLUMNS,
 )
 
+from predictive_maintenance.inference.errors import (
+    InferenceInputError,
+)
 
-class EngineHistoryValidationError(ValueError):
+class EngineHistoryValidationError(
+    InferenceInputError
+):
     """
-    Raised when raw engine history violates the Phase 2.1 inference contract.
+    Raised when raw engine history violates the Phase 2.1
+    inference contract.
     """
-
 
 def validate_engine_history(
     history_df: pd.DataFrame,

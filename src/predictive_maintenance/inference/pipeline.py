@@ -32,6 +32,12 @@ from predictive_maintenance.inference.schema import (
     CYCLE_COLUMN,
 )
 
+from predictive_maintenance.inference.errors import (
+    InferenceFeatureError,
+    InferenceModelContractError,
+    InferencePredictionError,
+)
+
 @dataclass(frozen=True)
 class PredictionResult:
     """
@@ -153,7 +159,7 @@ class RULInferencePipeline:
         if locked_n_features != len(
             self._feature_names
         ):
-            raise ValueError(
+            raise InferenceModelContractError(
                 "Locked specification feature count does not match "
                 "the length of feature_names."
             )
@@ -167,7 +173,7 @@ class RULInferencePipeline:
 
 
         if model_n_features is None:
-            raise ValueError(
+            raise InferenceModelContractError(
                 "Loaded estimator does not expose n_features_in_."
             )
 
@@ -177,7 +183,7 @@ class RULInferencePipeline:
         ) != len(
             self._feature_names
         ):
-            raise ValueError(
+            raise InferenceModelContractError(
                 "Fitted estimator feature count does not match "
                 "the locked specification."
             )
@@ -274,7 +280,7 @@ class RULInferencePipeline:
         if predictions.shape != (
             1,
         ):
-            raise RuntimeError(
+            raise InferencePredictionError(
                 "Expected exactly one prediction from the fitted model."
             )
 
@@ -287,7 +293,7 @@ class RULInferencePipeline:
         if not np.isfinite(
             predicted_rul
         ):
-            raise RuntimeError(
+            raise InferencePredictionError(
                 "Fitted model returned a non-finite RUL prediction."
             )
 
@@ -331,7 +337,7 @@ class RULInferencePipeline:
 
 
         if missing_features:
-            raise ValueError(
+            raise InferenceFeatureError(
                 "Inference feature construction is missing locked "
                 f"model features: {missing_features}"
             )
@@ -358,7 +364,7 @@ class RULInferencePipeline:
 
 
         if X.shape != expected_shape:
-            raise ValueError(
+            raise InferenceFeatureError(
                 "Model input has unexpected shape. "
                 f"Expected {expected_shape}, received {X.shape}."
             )
@@ -367,7 +373,7 @@ class RULInferencePipeline:
         if tuple(
             X.columns
         ) != self._feature_names:
-            raise ValueError(
+            raise InferenceFeatureError(
                 "Model input feature order does not match "
                 "the locked specification."
             )
@@ -378,7 +384,7 @@ class RULInferencePipeline:
                 dtype=float
             )
         ).all():
-            raise ValueError(
+            raise InferenceFeatureError(
                 "Model input contains NaN or infinite values."
             )
 

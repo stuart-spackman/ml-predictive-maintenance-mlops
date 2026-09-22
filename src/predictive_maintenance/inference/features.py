@@ -34,6 +34,10 @@ from predictive_maintenance.inference.validation import (
     validate_engine_history,
 )
 
+from predictive_maintenance.inference.errors import (
+    InferenceFeatureError,
+)
+
 
 PHASE_21_TEMPORAL_SUPERSET = tuple(
     dict.fromkeys(
@@ -203,7 +207,7 @@ def build_latest_temporal_row(
     if not np.isfinite(
         latest_temporal_values
     ).all():
-        raise ValueError(
+        raise InferenceFeatureError(
             "Latest engine cycle does not contain a complete finite "
             "Phase 1.6 temporal representation."
         )
