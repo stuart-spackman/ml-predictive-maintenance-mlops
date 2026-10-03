@@ -48,3 +48,19 @@ What is exception chaining with `raise ... from error`, and why is it useful to 
 *The principle at play here is that when errors are encountered it's desirable to have a information about the try low-level problem and the application-level meaning of the error. Exception chaining is a technique that allows you to get both of these concepts in the same error detection.*
 
 Exception chaining allows us to know both the application meaning (what operation failed?) and the technical cause (what low-level exception triggered it?).
+
+### Ideas to Retain
+
+* Expected failures are intentionally modeled conditions; unexpected failures can be genuine bugs or internal system problems. 
+
+* Never turn every exception into "bad caller input."
+
+* A exception hierarchy lets callers catch either a specific failure or all known inference failures through a common base class. 
+
+* Fail closed when an important contract or integrity guarantee cannot be established. 
+
+* A negative finite RUL is potentially poor model behavior, not automatically invalid software output. 
+
+* Input-distribution monitoring and output validity are separate concerns. 
+
+* Exception chaining preserves both what the failure means to our application and what low-level technical error caused it.

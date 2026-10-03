@@ -64,7 +64,7 @@ GET = give me information
 
 POST = I'm giving you some data and I expect you to do something with it
 
-The inference pipline provides the capability.
+The inference pipeline provides the capability.
 
 The HTTP endpoint exposes that capability to other software over HTTP. 
 
