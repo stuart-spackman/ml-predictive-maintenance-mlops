@@ -391,6 +391,34 @@ class RULInferencePipeline:
 
         return X
 
+    @property
+    def model_family(
+            self,
+        ) -> str:
+        """
+        Return the runtime estimator class name.
+
+        This exposes safe model metadata without exposing the
+        estimator object itself.
+        """
+
+        return type(
+            self._model
+        ).__name__
+
+
+    @property
+    def feature_count(
+        self,
+    ) -> int:
+        """
+        Return the number of locked model-input features.
+        """
+
+        return len(
+            self._feature_names
+        )
+
 def create_default_inference_pipeline(
 ) -> RULInferencePipeline:
     """

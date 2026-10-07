@@ -63,3 +63,23 @@ Phase 2.2 will not:
 - silently modify model predictions,
 - implement the Streamlit interface,
 - containerize the application.
+
+## Model runtime lifecycle
+
+The Phase 2.1 inference pipeline is an application-level dependency.
+
+At application startup:
+
+1. the frozen Phase 1 artifacts are loaded,
+2. artifact integrity is verified,
+3. model/spec compatibility is verified,
+4. one `RULInferencePipeline` is created,
+5. the pipeline is stored in application state.
+
+During normal request handling, endpoints reuse the existing pipeline.
+
+Prediction requests must not reload or refit the model.
+
+If the required frozen inference artifacts cannot be loaded or verified,
+application startup should fail rather than expose an untrusted prediction
+service.
