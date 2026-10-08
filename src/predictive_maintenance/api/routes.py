@@ -18,12 +18,18 @@ from predictive_maintenance.api.dependencies import (
 from predictive_maintenance.api.schemas import (
     HealthResponse,
     ModelMetadataResponse,
+    PredictionRequest,
+    PredictionResponse,
 )
 
 from predictive_maintenance.config import (
     DATASET_NAME,
 )
 
+from predictive_maintenance.api.adapters import (
+    prediction_request_to_history_dataframe,
+    prediction_result_to_response,
+)
 
 router = APIRouter()
 
@@ -77,4 +83,44 @@ def get_model_metadata(
         feature_count=(
             pipeline.feature_count
         ),
+    )
+
+# ------------------------------------------------------------
+# 4L — RUL prediction
+# ------------------------------------------------------------
+
+@router.post(
+    "/predict",
+    response_model=PredictionResponse,
+)
+def predict_rul(
+    prediction_request: PredictionRequest,
+    pipeline: InferencePipelineDependency,
+) -> PredictionResponse:
+    """
+    Generate one latest-cycle RUL prediction from one raw engine history.
+
+    HTTP/Pydantic concerns are handled here and in the API adapter.
+
+    Domain validation, temporal feature engineering, locked feature
+    selection, artifact usage, and model prediction remain Phase 2.1
+    responsibilities.
+    """
+
+    history_df = (
+        prediction_request_to_history_dataframe(
+            prediction_request
+        )
+    )
+
+
+    result = pipeline.predict(
+        history_df
+    )
+
+
+    return (
+        prediction_result_to_response(
+            result
+        )
     )

@@ -83,3 +83,47 @@ Prediction requests must not reload or refit the model.
 If the required frozen inference artifacts cannot be loaded or verified,
 application startup should fail rather than expose an untrusted prediction
 service.
+
+## POST /predict
+
+### Purpose
+
+Generate one latest-cycle RUL prediction using the completed Phase 2.1
+inference pipeline.
+
+### Request
+
+The request contains:
+
+- one `engine_id`,
+- one or more raw `observations`,
+- each observation contains:
+  - `cycle`,
+  - three operating settings,
+  - 21 sensor measurements.
+
+Pydantic validates the public network structure.
+
+Phase 2.1 remains authoritative for inference-domain rules such as:
+
+- exactly one engine,
+- complete contiguous history,
+- history beginning at cycle 1,
+- minimum history length,
+- finite numeric values.
+
+### Response
+
+A successful prediction returns:
+
+- `engine_id`,
+- `current_cycle`,
+- `predicted_rul`.
+
+### Boundary behavior
+
+Phase 2.2 translates the public request representation into the canonical
+Phase 2.1 dataframe representation.
+
+Phase 2.2 does not duplicate temporal feature engineering, model feature
+selection, artifact loading, or prediction logic.
