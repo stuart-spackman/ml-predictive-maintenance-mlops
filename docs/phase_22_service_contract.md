@@ -127,3 +127,60 @@ Phase 2.1 dataframe representation.
 
 Phase 2.2 does not duplicate temporal feature engineering, model feature
 selection, artifact loading, or prediction logic.
+
+## Prediction failure behavior
+
+### API-schema validation failure
+
+Examples:
+
+- missing required field,
+- invalid field type,
+- unknown field.
+
+Handled by FastAPI/Pydantic.
+
+Expected HTTP status:
+
+- `422 Unprocessable Entity`
+
+### Inference-domain input failure
+
+Examples:
+
+- insufficient history,
+- duplicate cycles,
+- missing cycles,
+- otherwise illegal Phase 2.1 engine history.
+
+Handled authoritatively by Phase 2.1 and translated by Phase 2.2.
+
+Expected HTTP status:
+
+- `422 Unprocessable Entity`
+
+Public error code:
+
+- `invalid_inference_request`
+
+### Internal inference failure
+
+Examples:
+
+- feature-construction failure,
+- model-contract failure,
+- invalid prediction output.
+
+Expected HTTP status:
+
+- `500 Internal Server Error`
+
+Public error code:
+
+- `inference_service_error`
+
+Detailed internal exception information is logged server-side rather than
+exposed to clients.
+
+Critical artifact/model initialization failures should ordinarily prevent
+application startup rather than first appearing during a prediction request.

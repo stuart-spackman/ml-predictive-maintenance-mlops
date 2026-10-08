@@ -20,6 +20,10 @@ from predictive_maintenance.api.routes import (
     router,
 )
 
+from predictive_maintenance.api.error_handlers import (
+    register_exception_handlers,
+)
+
 APP_TITLE = (
     "Predictive Maintenance RUL API"
 )
@@ -90,6 +94,10 @@ app = FastAPI(
     description=APP_DESCRIPTION,
     version=APP_VERSION,
     lifespan=lifespan,
+)
+
+register_exception_handlers(
+    app
 )
 
 app.include_router(

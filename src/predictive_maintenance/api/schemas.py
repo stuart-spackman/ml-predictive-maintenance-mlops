@@ -142,3 +142,21 @@ class ModelMetadataResponse(APIModel):
     model_family: str
 
     feature_count: int
+
+# ------------------------------------------------------------
+# Phase 2.2 — TG5
+# Public API error response
+# ------------------------------------------------------------
+
+class ErrorResponse(APIModel):
+    """
+    Stable public representation of a known API/inference failure.
+
+    `error_code` is intended for programmatic interpretation.
+
+    `message` is intended for human-readable context.
+    """
+
+    error_code: str
+
+    message: str

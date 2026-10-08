@@ -47,3 +47,4 @@ RAW_NUMERIC_COLUMNS = (
 assert len(
     REQUIRED_RAW_HISTORY_COLUMNS
 ) == 26
+
