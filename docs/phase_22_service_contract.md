@@ -184,3 +184,21 @@ exposed to clients.
 
 Critical artifact/model initialization failures should ordinarily prevent
 application startup rather than first appearing during a prediction request.
+
+## Automated API contract verification
+
+Phase 2.2 maintains automated FastAPI tests covering:
+
+- service health,
+- runtime metadata,
+- declared OpenAPI routes,
+- successful RUL prediction,
+- parity between HTTP output and Phase 2.1 prediction output,
+- Pydantic schema rejection,
+- Phase 2.1 input-error translation to HTTP 422,
+- known internal inference-error translation to sanitized HTTP 500 responses.
+
+Tests use FastAPI's in-process `TestClient`.
+
+Manual Uvicorn-backed smoke scripts remain available for real network-level
+integration checks.
