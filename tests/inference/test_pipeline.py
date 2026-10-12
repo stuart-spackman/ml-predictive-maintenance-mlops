@@ -17,6 +17,11 @@ from predictive_maintenance.inference.pipeline import (
     RULInferencePipeline,
 )
 
+import math
+
+from predictive_maintenance.inference.contract import (
+    PHASE_21_INFERENCE_CONTRACT,
+)
 
 def test_model_input_matches_locked_feature_schema(
     inference_pipeline,
@@ -154,3 +159,56 @@ def test_pipeline_rejects_model_feature_count_mismatch():
         RULInferencePipeline(
             artifacts=fake_artifacts
         )
+
+def test_minimum_history_boundary(
+    inference_pipeline,
+    valid_20_cycle_history,
+):
+    minimum_cycles = (
+        PHASE_21_INFERENCE_CONTRACT
+        .minimum_history_cycles
+    )
+
+
+    too_short_history = (
+        valid_20_cycle_history
+        .head(
+            minimum_cycles - 1
+        )
+        .copy()
+    )
+
+
+    with pytest.raises(
+        InferenceInputError
+    ):
+        inference_pipeline.predict(
+            too_short_history
+        )
+
+
+    minimum_valid_history = (
+        valid_20_cycle_history
+        .head(
+            minimum_cycles
+        )
+        .copy()
+    )
+
+
+    result = (
+        inference_pipeline.predict(
+            minimum_valid_history
+        )
+    )
+
+
+    assert (
+        result.current_cycle
+        ==
+        minimum_cycles
+    )
+
+    assert math.isfinite(
+        result.predicted_rul
+    )

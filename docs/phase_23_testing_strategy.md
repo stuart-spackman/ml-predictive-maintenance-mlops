@@ -166,3 +166,41 @@ fixture with deterministic cleanup.
 
 Tests must not rely on execution order or leave shared state altered for
 later tests.
+
+## Core Inference Hardening
+
+Phase 2.3 reviewed the existing Phase 2.1 inference suite against the
+highest-risk behavioral contracts.
+
+Hardening prioritizes:
+
+- contract boundary values,
+- caller-owned input immutability,
+- normalization invariance,
+- temporal causality,
+- engine isolation,
+- artifact integrity,
+- model/feature compatibility,
+- deterministic end-to-end inference.
+
+Existing Phase 2.1 tests are retained when they already provide strong
+evidence. New tests are added only for meaningful gaps.
+
+### Testing techniques
+
+Boundary-value testing checks behavior immediately around contract
+thresholds.
+
+Metamorphic testing verifies known relationships between outputs when
+inputs undergo meaning-preserving transformations.
+
+Examples include:
+
+- shuffled but otherwise identical engine histories producing the same
+  prediction,
+- past-cycle temporal features remaining unchanged when future cycles are
+  appended,
+- one engine's features remaining unchanged when other engines are
+  processed alongside it.
+
+Tests prefer behavioral guarantees over incidental implementation details.

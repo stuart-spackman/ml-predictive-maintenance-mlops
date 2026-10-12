@@ -29,7 +29,6 @@ from predictive_maintenance.features.feature_sets import (
     GROUP_COLUMN,
 )
 
-
 # ------------------------------------------------------------
 # Application lifecycle
 # ------------------------------------------------------------
@@ -236,4 +235,101 @@ def override_inference_pipeline():
 
     app.dependency_overrides.update(
         original_overrides
+    )
+
+import pytest
+
+from predictive_maintenance.inference.pipeline import (
+    create_default_inference_pipeline,
+)
+
+
+@pytest.fixture(
+    scope="session"
+)
+def inference_pipeline():
+    """
+    Load and verify the real frozen inference pipeline once for the
+    inference test session.
+    """
+
+    return (
+        create_default_inference_pipeline()
+    )
+
+from pandas.testing import (
+    assert_frame_equal,
+)
+
+
+def test_prediction_does_not_mutate_caller_history(
+    inference_pipeline,
+    valid_engine_history,
+):
+    original_history = (
+        valid_engine_history
+        .copy(
+            deep=True
+        )
+    )
+
+
+    inference_pipeline.predict(
+        valid_engine_history
+    )
+
+
+    assert_frame_equal(
+        valid_engine_history,
+        original_history,
+    )
+
+def test_prediction_is_invariant_to_input_row_order(
+    inference_pipeline,
+    valid_engine_history,
+):
+    ordered_result = (
+        inference_pipeline.predict(
+            valid_engine_history
+        )
+    )
+
+
+    shuffled_history = (
+        valid_engine_history
+        .sample(
+            frac=1.0,
+            random_state=42,
+        )
+        .reset_index(
+            drop=True
+        )
+    )
+
+
+    shuffled_result = (
+        inference_pipeline.predict(
+            shuffled_history
+        )
+    )
+
+
+    assert (
+        shuffled_result.engine_id
+        ==
+        ordered_result.engine_id
+    )
+
+    assert (
+        shuffled_result.current_cycle
+        ==
+        ordered_result.current_cycle
+    )
+
+    assert (
+        shuffled_result.predicted_rul
+        ==
+        pytest.approx(
+            ordered_result.predicted_rul
+        )
     )
