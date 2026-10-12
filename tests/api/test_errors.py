@@ -126,51 +126,36 @@ class FailingPredictionPipeline:
 def test_internal_inference_failure_returns_sanitized_500(
     api_client,
     valid_prediction_payload,
+    override_inference_pipeline,
 ):
-    failing_pipeline = (
+
+    override_inference_pipeline(
         FailingPredictionPipeline()
     )
 
 
-    app.dependency_overrides[
-        get_inference_pipeline
-    ] = lambda: failing_pipeline
-
-
-    try:
-
-        response = (
-            api_client.post(
-                "/predict",
-                json=valid_prediction_payload,
-            )
+    response = (
+        api_client.post(
+            "/predict",
+            json=valid_prediction_payload,
         )
+    )
 
 
-        assert response.status_code == 500
+    assert response.status_code == 500
 
 
-        assert response.json() == {
-            "error_code": (
-                "inference_service_error"
-            ),
-            "message": (
-                "The inference service could not complete the prediction."
-            ),
-        }
+    assert response.json() == {
+        "error_code": (
+            "inference_service_error"
+        ),
+        "message": (
+            "The inference service could not complete the prediction."
+        ),
+    }
 
 
-        # Make sure internal diagnostic text does not leak publicly.
-
-        assert (
-            "Sensitive internal diagnostic detail."
-            not in response.text
-        )
-
-
-    finally:
-
-        app.dependency_overrides.pop(
-            get_inference_pipeline,
-            None,
-        )
+    assert (
+        "Sensitive internal diagnostic detail."
+        not in response.text
+    )

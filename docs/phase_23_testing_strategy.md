@@ -121,3 +121,48 @@ software-testing scope.
 
 10. New tests should be justified by an identifiable risk or missing
     guarantee.
+
+## Test Infrastructure and Isolation Strategy
+
+### Fixture scope
+
+Fixtures should use the narrowest practical lifetime.
+
+Broad fixture scope is appropriate when setup is expensive and the shared
+resource behaves effectively read-only during tests.
+
+Mutable scenario-specific data should normally be function-scoped or
+copied before use.
+
+### API lifecycle
+
+FastAPI `TestClient` is session-scoped so the application lifespan and
+verified inference pipeline are initialized once for the API test session.
+
+### Prediction payloads
+
+The canonical FD001 API payload may be constructed from a session-scoped
+template, but each test receives an independent deep copy.
+
+Tests may therefore mutate their own request payload without contaminating
+other tests.
+
+### Dependency overrides
+
+Tests that substitute the FastAPI inference dependency use a fixture with
+guaranteed teardown.
+
+The prior dependency-override state is restored after each such test.
+
+### Temporary external state
+
+Temporary filesystem behavior should use pytest-managed facilities such as
+`tmp_path`.
+
+Temporary Python/configuration changes should use `monkeypatch` or another
+fixture with deterministic cleanup.
+
+### Isolation principle
+
+Tests must not rely on execution order or leave shared state altered for
+later tests.
