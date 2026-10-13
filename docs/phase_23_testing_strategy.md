@@ -240,3 +240,82 @@ Tests are not created merely to memorialize every implementation mistake.
 Tests focus on application-specific FastAPI configuration and integration
 rather than attempting to re-test basic FastAPI, Starlette, Pydantic, or
 scikit-learn behavior.
+
+## Coverage-Gap Review
+
+| Area | Behavioral status | Coverage observation | Action |
+|---|---|---|---|
+| Raw validation | Strong | Major success/failure branches exercised | Retain |
+| Temporal features | Strong | Core transformations and invariants exercised | Retain |
+| Artifact verification | Strong | Real load + corruption paths exercised | Retain |
+| Pipeline | Strong | Success + compatibility/input failures exercised | Retain |
+| API prediction | Strong | Public success path exercised | Retain |
+| HTTP errors | Strong | 422 and sanitized 500 exercised | Retain |
+| <actual uncovered area> | Partial | Important branch uncovered | Add targeted test |
+
+## Coverage and Quality Gates
+
+### Coverage role
+
+Coverage is used as a diagnostic map for identifying untested code and
+decision branches.
+
+Coverage percentage is not treated as a direct measure of test quality.
+
+Uncovered high-risk behavior is prioritized over maximizing the global
+percentage.
+
+### Coverage mode
+
+The project measures:
+
+- line execution,
+- branch execution,
+- missing source lines.
+
+Coverage focuses on the `predictive_maintenance` application package.
+
+### Quality review
+
+Important tests are reviewed for:
+
+- meaningful behavioral assertions,
+- defensible test oracles,
+- clear scenario/expected-behavior naming,
+- correct architectural error boundaries,
+- isolation from unrelated test state,
+- avoidance of unnecessary implementation-detail coupling.
+
+### Coverage threshold
+
+Initial coverage is measured after inference and API hardening.
+
+The enforcement threshold is selected from the observed stable baseline
+rather than from an arbitrary target percentage.
+
+The threshold acts primarily as a regression guardrail against growth in
+untested production code.
+
+### CI-ready verification contract
+
+The authoritative full-suite quality gate is:
+
+`python -m pytest --cov=predictive_maintenance --cov-report=term-missing --cov-fail-under=<THRESHOLD> -q`
+
+Branch coverage is enabled through project coverage configuration.
+
+Phase 2.4 will automate this command in CI.
+
+## Phase 2.3 Coverage Baseline
+
+- Tests collected: <actual>
+- Tests passing: <actual>
+- Line/statement coverage: <actual>
+- Branch-aware coverage: <actual>
+- Coverage gate: <actual threshold>
+- Slowest-test review completed: yes/no
+
+### Important uncovered areas reviewed
+
+- <area>: <decision>
+- <area>: <decision>

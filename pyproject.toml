@@ -44,3 +44,13 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = [
+    "predictive_maintenance",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
