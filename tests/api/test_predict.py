@@ -58,6 +58,16 @@ def test_valid_prediction_request_returns_200(
         ]
     )
 
+    body = response.json()
+
+    assert set(
+        body
+    ) == {
+        "engine_id",
+        "current_cycle",
+        "predicted_rul",
+    }
+
 def test_http_prediction_matches_phase_21_pipeline(
     api_client,
     valid_prediction_payload,
@@ -111,5 +121,96 @@ def test_http_prediction_matches_phase_21_pipeline(
         ==
         pytest.approx(
             expected_result.predicted_rul
+        )
+    )
+
+from copy import (
+    deepcopy,
+)
+
+def test_prediction_is_invariant_to_observation_order(
+    api_client,
+    valid_prediction_payload,
+):
+    ordered_response = (
+        api_client.post(
+            "/predict",
+            json=valid_prediction_payload,
+        )
+    )
+
+
+    assert (
+        ordered_response.status_code
+        ==
+        200
+    )
+
+
+    reversed_payload = deepcopy(
+        valid_prediction_payload
+    )
+
+
+    reversed_payload[
+        "observations"
+    ].reverse()
+
+
+    reversed_response = (
+        api_client.post(
+            "/predict",
+            json=reversed_payload,
+        )
+    )
+
+
+    assert (
+        reversed_response.status_code
+        ==
+        200
+    )
+
+
+    ordered_body = (
+        ordered_response.json()
+    )
+
+    reversed_body = (
+        reversed_response.json()
+    )
+
+
+    assert (
+        reversed_body[
+            "engine_id"
+        ]
+        ==
+        ordered_body[
+            "engine_id"
+        ]
+    )
+
+
+    assert (
+        reversed_body[
+            "current_cycle"
+        ]
+        ==
+        ordered_body[
+            "current_cycle"
+        ]
+    )
+
+
+    assert (
+        reversed_body[
+            "predicted_rul"
+        ]
+        ==
+        pytest.approx(
+            ordered_body[
+                "predicted_rul"
+            ]
         )
     )

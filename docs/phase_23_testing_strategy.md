@@ -204,3 +204,39 @@ Examples include:
   processed alongside it.
 
 Tests prefer behavioral guarantees over incidental implementation details.
+
+## API, Failure-Injection, and Regression Hardening
+
+The Phase 2.2 API suite was reviewed against public-service boundaries,
+failure behavior, and important historical regressions.
+
+Hardening prioritizes:
+
+- controlled public response shapes,
+- preservation of inference semantics through the HTTP adapter,
+- rejection of undeclared request fields,
+- proof that schema-invalid requests do not execute prediction logic,
+- domain-input error translation,
+- sanitized server-side failure responses,
+- preservation of detailed diagnostics in server logs,
+- regression protection for previously observed integration failures.
+
+### Failure injection
+
+Known internal failure behavior is tested using controlled test doubles
+injected through FastAPI dependency overrides.
+
+Real production model artifacts are not damaged to manufacture failures.
+
+### Regression strategy
+
+Real defects become permanent regression tests when they reveal an
+important system or public-contract guarantee.
+
+Tests are not created merely to memorialize every implementation mistake.
+
+### Framework boundary
+
+Tests focus on application-specific FastAPI configuration and integration
+rather than attempting to re-test basic FastAPI, Starlette, Pydantic, or
+scikit-learn behavior.

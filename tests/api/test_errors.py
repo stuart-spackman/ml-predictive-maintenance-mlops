@@ -70,6 +70,13 @@ def test_short_history_returns_domain_422(
     api_client,
     valid_prediction_payload,
 ):
+    """
+    Regression protection:
+
+    A structurally valid but domain-invalid short history must be
+    translated from Phase 2.1 InferenceInputError to HTTP 422 rather
+    than escaping as a generic HTTP 500.
+    """
     payload = deepcopy(
         valid_prediction_payload
     )
@@ -123,16 +130,25 @@ class FailingPredictionPipeline:
             "Sensitive internal diagnostic detail."
         )
 
+import logging
+
 def test_internal_inference_failure_returns_sanitized_500(
     api_client,
     valid_prediction_payload,
     override_inference_pipeline,
+    caplog,
 ):
+
+    caplog.set_level(
+        logging.ERROR, 
+        logger=(
+            "predictive_maintenance.api.error_handlers"
+        ),
+    )
 
     override_inference_pipeline(
         FailingPredictionPipeline()
     )
-
 
     response = (
         api_client.post(
@@ -158,4 +174,85 @@ def test_internal_inference_failure_returns_sanitized_500(
     assert (
         "Sensitive internal diagnostic detail."
         not in response.text
+    )
+
+    assert (
+        "Sensitive internal diagnostic detail."
+        in caplog.text
+    )
+
+def test_unknown_request_field_returns_422(
+    api_client,
+    valid_prediction_payload,
+):
+    valid_prediction_payload[
+        "actual_rul"
+    ] = 123
+
+
+    response = (
+        api_client.post(
+            "/predict",
+            json=valid_prediction_payload,
+        )
+    )
+
+
+    assert (
+        response.status_code
+        ==
+        422
+    )
+
+
+    body = response.json()
+
+
+    assert "detail" in body
+
+class PredictionMustNotRunPipeline:
+    """
+    Test double used to prove that schema-invalid requests never reach
+    the inference prediction call.
+    """
+
+    def predict(
+        self,
+        history_df,
+    ):
+        raise AssertionError(
+            "Prediction should not run for a schema-invalid request."
+        )
+
+def test_schema_invalid_request_does_not_execute_prediction(
+    api_client,
+    valid_prediction_payload,
+    override_inference_pipeline,
+):
+    override_inference_pipeline(
+        PredictionMustNotRunPipeline()
+    )
+
+
+    del (
+        valid_prediction_payload[
+            "observations"
+        ][0][
+            "sensor_measurement_12"
+        ]
+    )
+
+
+    response = (
+        api_client.post(
+            "/predict",
+            json=valid_prediction_payload,
+        )
+    )
+
+
+    assert (
+        response.status_code
+        ==
+        422
     )
