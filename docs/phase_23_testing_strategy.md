@@ -319,3 +319,29 @@ Phase 2.4 will automate this command in CI.
 
 - <area>: <decision>
 - <area>: <decision>
+
+## Known Testing Limitations
+
+The current automated suite does not establish:
+
+- predictive accuracy beyond the Phase 1 evaluation evidence,
+- absence of future production data drift,
+- correctness for every possible engine history,
+- production-scale throughput or concurrency behavior,
+- correctness of Docker/container packaging,
+- correctness of CI infrastructure,
+- correctness of cloud deployment,
+- uptime or production observability.
+
+These concerns belong to other phases or future operational work.
+
+## Known Dependency Notes
+
+The current FastAPI/Starlette test stack emits a deprecation warning related
+to the TestClient HTTP dependency.
+
+The warning is non-blocking for the current test suite.
+
+Dependency compatibility should be reviewed deliberately during Phase 2.4
+environment/dependency management rather than changing the working
+environment solely to suppress the warning.
