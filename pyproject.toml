@@ -7,39 +7,35 @@ name = "predictive-maintenance"
 version = "0.1.0"
 description = "Predictive maintenance and MLOps project using NASA C-MAPSS turbofan degradation data"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.13,<3.14"
 
 dependencies = [
-    "numpy",
-    "pandas",
-    "scipy",
-    "scikit-learn",
-    "matplotlib",
-    "seaborn",
-    "joblib",
-    "tqdm",
-    "python-dotenv",
-    "pyyaml",
+    "numpy>=2.4.4,<3",
+    "pandas>=3.0.2,<4",
+    "scikit-learn>=1.8.0,<2",
+    "joblib>=1.5.3,<2",
+    "fastapi>=0.141.1,<1",
+    "pydantic>=2.13.4,<3",
+    "uvicorn[standard]>=0.52.1,<1",
 ]
 
 [project.optional-dependencies]
 notebook = [
-    "jupyterlab",
-    "ipykernel",
+    "jupyterlab>=4.5.6,<5",
+    "ipykernel>=7.2.0,<8",
+    "matplotlib>=3.10.8,<4",
 ]
 
 mlops = [
     "mlflow",
-    "fastapi",
-    "uvicorn[standard]",
-    "pydantic",
     "evidently",
     "prometheus-client",
 ]
 
 dev = [
-    "pytest",
-    "httpx",
+    "pytest>=9.1.1,<10",
+    "pytest-cov>=7.1.0,<8",
+    "httpx>=0.28.1,<0.29",
 ]
 
 [tool.setuptools.packages.find]

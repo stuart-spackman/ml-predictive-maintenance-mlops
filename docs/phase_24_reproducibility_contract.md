@@ -86,3 +86,32 @@ The intended hierarchy is:
 
 The developer's existing `.venv` is evidence about the current working
 environment but is not itself a reproducibility specification.
+
+## Python Dependency Strategy
+
+`pyproject.toml` is the authoritative declaration of the project's direct
+runtime and development dependencies.
+
+Runtime dependencies are required to install and operate the application.
+
+Development dependencies extend the runtime environment with tooling
+required to execute the project's verification workflow.
+
+`requirements/constraints.txt` records the resolved dependency versions
+from a clean environment that passed the Phase 2.3 quality gate.
+
+The constraints file is a tested resolution, not a substitute for
+declaring the project's direct dependencies.
+
+A clean development environment must be reconstructable with:
+
+`python -m pip install -c requirements/constraints.txt -e ".[dev]"`
+
+## Clean-Environment Verification
+
+- clean environment created: yes
+- package installation from project metadata: pass/fail
+- `pip check`: pass/fail
+- package import: pass/fail
+- FastAPI app import: pass/fail
+- Phase 2.3 quality gate: pass/fail
