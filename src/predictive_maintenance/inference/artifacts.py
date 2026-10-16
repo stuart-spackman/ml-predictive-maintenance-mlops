@@ -23,21 +23,13 @@ from predictive_maintenance.inference.errors import (
     InferenceArtifactError,
 )
 
+from predictive_maintenance.paths import (
+    REPORTS_DIR,
+)
+
 # ------------------------------------------------------------
 # Project artifact locations
 # ------------------------------------------------------------
-
-PROJECT_ROOT = (
-    Path(__file__)
-    .resolve()
-    .parents[3]
-)
-
-REPORTS_DIR = (
-    PROJECT_ROOT
-    / "reports"
-)
-
 
 LOCKED_MODEL_SPEC_PATH = (
     REPORTS_DIR
