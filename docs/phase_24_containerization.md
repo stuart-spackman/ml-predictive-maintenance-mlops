@@ -40,3 +40,31 @@ The default image command starts Uvicorn on container port 8000.
 - package import: `<PASS/FAIL>`
 - required artifacts present: `<PASS/FAIL>`
 - inference pipeline initialization: `<PASS/FAIL>`
+
+## Container Runtime Verification
+
+Image:
+`predictive-maintenance-api:0.1.0`
+
+Container port:
+`8000`
+
+Host publication:
+`localhost:8000 -> container:8000`
+
+Verification results:
+
+- foreground startup: PASS
+- inference-pipeline startup: PASS
+- `/health`: PASS
+- `/metadata`: PASS
+- `/predict`: PASS
+- expected failure behavior: PASS
+- graceful shutdown: PASS
+- stopped-container restart: PASS
+- fresh container recreation: PASS
+- local/container prediction parity: PASS
+
+The service was verified by making real HTTP requests through
+Docker's published host port rather than only through FastAPI
+TestClient.
