@@ -115,3 +115,32 @@ A clean development environment must be reconstructable with:
 - package import: pass/fail
 - FastAPI app import: pass/fail
 - Phase 2.3 quality gate: pass/fail
+
+## Continuous Integration
+
+GitHub Actions automatically verifies changes targeting `main`.
+
+### Python quality gate
+
+A fresh Ubuntu runner:
+
+1. checks out the repository,
+2. configures Python 3.13,
+3. installs the project and development dependencies using
+   `pyproject.toml` constrained by `requirements/constraints.txt`,
+4. runs `pip check`,
+5. smoke-tests package/API imports,
+6. executes the Phase 2.3 pytest + coverage gate.
+
+Coverage fails below 60%.
+
+### Container verification
+
+After the Python quality gate passes, CI:
+
+1. builds the Docker image,
+2. verifies the package inside the image,
+3. initializes the real frozen inference pipeline inside the image.
+
+The Docker job depends on the Python quality-gate job and therefore
+does not run when the primary quality gate fails.

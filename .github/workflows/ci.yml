@@ -84,4 +84,31 @@ jobs:
         run: |
           docker run --rm \
             predictive-maintenance-api:ci \
-            python -c "from predictive_maintenance.inference.pipeline import create_default_inference_pipeline; create_default_inference_pipeline(); print('Container inference pipeline: PASSED')"
+            python -c "from predictive_maintenance.inference.pipeline import create_default_inference_pipeline; create_default_inference_pipeline(); print('Container inference pipeline: PASSED')" 
+
+      - name: Start containerized service
+        run: |
+          docker run -d \
+            --name pm-api-ci \
+            -p 8000:8000 \
+            predictive-maintenance-api:ci
+
+      - name: Verify containerized health endpoint
+        run: |
+          for attempt in {1..20}; do
+            if curl -fsS http://127.0.0.1:8000/health; then
+              echo
+              echo "Containerized health check: PASSED"
+              exit 0
+            fi
+
+            sleep 1
+          done
+
+          echo "Containerized health check: FAILED"
+          docker logs pm-api-ci
+          exit 1
+
+      - name: Clean up container
+        if: always()
+        run: docker rm -f pm-api-ci || true
