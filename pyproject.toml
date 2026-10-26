@@ -38,6 +38,11 @@ dev = [
     "httpx>=0.28.1,<0.29",
 ]
 
+demo = [
+    "streamlit>=1.66,<2",
+    "httpx>=0.28.1,<0.29",
+]
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
