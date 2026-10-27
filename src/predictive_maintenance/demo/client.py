@@ -153,11 +153,35 @@ class PredictiveMaintenanceAPIClient:
         self,
         payload: dict[str, Any],
     ) -> dict[str, Any]:
-        return self._request_json(
-            "POST",
-            "/predict",
-            json=payload,
+    
+        response_payload = (
+            self._request_json(
+                "POST",
+                "/predict",
+                json=payload,
+            )
         )
+    
+        required_fields = {
+            "engine_id",
+            "current_cycle",
+            "predicted_rul",
+        }
+    
+        missing_fields = (
+            required_fields
+            - set(
+                response_payload
+            )
+        )
+    
+        if missing_fields:
+            raise DemoProtocolError(
+                "Prediction response is missing required fields: "
+                f"{sorted(missing_fields)}"
+            )
+    
+        return response_payload
 
 
 def create_default_api_client(

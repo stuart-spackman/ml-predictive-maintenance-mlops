@@ -33,3 +33,9 @@ class DemoProtocolError(DemoClientError):
     The API response did not satisfy the response contract
     expected by the demo client.
     """
+
+class DemoInputError(Exception):
+    """
+    Uploaded demo input cannot be converted into the
+    API request representation.
+    """
