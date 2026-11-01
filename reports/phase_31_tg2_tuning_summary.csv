@@ -1,0 +1,3 @@
+model,pooled_oof_rmse,pooled_oof_mae,rmse_vs_incumbent
+incumbent_random_forest,37.83457213734644,26.62445294884782,0.0
+tuned_extra_trees,37.43903006237209,26.322632029566044,-0.395542074974351

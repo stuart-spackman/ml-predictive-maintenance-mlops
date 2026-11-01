@@ -1,0 +1,6 @@
+fold,train_engines,validation_engines,incumbent_rmse,challenger_rmse,rmse_delta_challenger_minus_incumbent,inner_best_rmse,best_params
+1,80,20,42.353246524350695,42.29557130113753,-0.05767522321316676,35.48422396209967,"{""max_depth"": 20, ""max_features"": ""sqrt"", ""min_samples_leaf"": 2, ""min_samples_split"": 5}"
+2,80,20,39.17829593591378,38.94608116569033,-0.23221477022345027,36.628709265067734,"{""max_depth"": 20, ""max_features"": ""sqrt"", ""min_samples_leaf"": 2, ""min_samples_split"": 5}"
+3,80,20,38.936494546984115,37.292679290470566,-1.6438152565135482,39.25324309690665,"{""max_depth"": 20, ""max_features"": ""sqrt"", ""min_samples_leaf"": 2, ""min_samples_split"": 5}"
+4,80,20,36.0186749334103,35.81280484840028,-0.20587008501001947,37.22378689480345,"{""max_depth"": 12, ""max_features"": 1.0, ""min_samples_leaf"": 2, ""min_samples_split"": 5}"
+5,80,20,31.86801324540271,32.09094730218334,0.22293405678062683,38.34407517718402,"{""max_depth"": 20, ""max_features"": ""sqrt"", ""min_samples_leaf"": 2, ""min_samples_split"": 5}"
