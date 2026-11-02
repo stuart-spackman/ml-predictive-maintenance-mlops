@@ -1,0 +1,12 @@
+{
+  "hyperparameters": {
+    "max_depth": 20,
+    "max_features": "sqrt",
+    "min_samples_leaf": 2,
+    "min_samples_split": 5
+  },
+  "model_family": "ExtraTreesRegressor",
+  "n_estimators": 300,
+  "random_state": 42,
+  "source": "Modal best parameter configuration from Phase 3.1 TG2 nested CV."
+}

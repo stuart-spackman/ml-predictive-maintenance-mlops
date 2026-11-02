@@ -1,0 +1,53 @@
+{
+  "current_challenger": {
+    "feature_count": 36,
+    "model_family": "ExtraTreesRegressor",
+    "recipe": {
+      "hyperparameters": {
+        "max_depth": 20,
+        "max_features": "sqrt",
+        "min_samples_leaf": 2,
+        "min_samples_split": 5
+      },
+      "model_family": "ExtraTreesRegressor",
+      "n_estimators": 300,
+      "random_state": 42,
+      "source": "Modal best parameter configuration from Phase 3.1 TG2 nested CV."
+    },
+    "status": "experimental_challenger",
+    "training_objective": "unweighted_rows"
+  },
+  "dataset": "NASA C-MAPSS FD001",
+  "environment": {
+    "numpy_version": "2.4.4",
+    "pandas_version": "3.0.2",
+    "python_version": "3.13.1",
+    "scikit_learn_version": "1.8.0"
+  },
+  "evidence_files": [
+    "reports/phase_31_tg1_challenger_summary.csv",
+    "reports/phase_31_tg2_tuning_summary.csv",
+    "reports/phase_31_tg3_weighting_summary.csv",
+    "reports/phase_31_experiment_ledger.csv"
+  ],
+  "feature_count": 36,
+  "file_hashes": {
+    "pyproject.toml": "22f2aa7776abede52ccff33a0e75f896c79456a7192b8960bec78b2c4d039735",
+    "reports/phase_16_locked_model_spec.json": "34cdf9c7b844f71dba555b0bdc6206ee849eee7e5634e2ee4a8d6d4ed99f4c8e",
+    "reports/phase_31_experiment_contract.json": "32f7cbe68f8914533fc3483fa85149194a5559cffc0e8fd4aa8271eda81209d0",
+    "requirements/constraints.txt": "dff64a3167cba158458a49f7be76ff17571a82df3a1ebee8cf9bcf7efeb8dd74"
+  },
+  "generated_at_utc": "2026-11-02T22:22:04.678444+00:00",
+  "git": {
+    "commit": "5a879bc89c72c6d434323f204e1c8fe3f139a4e2",
+    "working_tree_dirty": true
+  },
+  "phase": "3.1",
+  "phase31_interpretation": {
+    "tg1": "The incumbent Random Forest outperformed default Extra Trees and default Histogram Gradient Boosting.",
+    "tg2": "Bounded nested-CV tuning produced a credible Extra Trees challenger with modestly lower pooled OOF RMSE than the incumbent.",
+    "tg3": "Engine-balanced weighting improved some supporting diagnostics but did not improve the declared primary pooled OOF RMSE, so the unweighted challenger recipe was retained."
+  },
+  "primary_metric": "pooled_oof_rmse",
+  "scope_note": "This manifest records Phase 3.1 experimental evidence. It does not represent model promotion."
+}

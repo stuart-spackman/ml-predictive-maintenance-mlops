@@ -1,0 +1,36 @@
+{
+  "phase": "3.1",
+  "name": "Advanced Modeling and Experimentation",
+  "dataset": "NASA C-MAPSS FD001",
+  "target": "rul",
+  "group_column": "unit_no",
+  "incumbent": {
+    "model_family": "RandomForestRegressor",
+    "n_model_features": 36,
+    "locked_spec": "reports/phase_16_locked_model_spec.json",
+    "fitted_artifact": "reports/phase_16_final_fitted_model.joblib",
+    "fit_record": "reports/phase_16_final_fit_record.json"
+  },
+  "experimental_contract": {
+    "primary_metric": "RMSE",
+    "group_by_engine": true,
+    "preserve_temporal_causality": true,
+    "use_official_test_for_challenger_selection": false,
+    "require_matched_comparison_conditions": true,
+    "incumbent_must_be_refit_within_experimental_training_boundaries": true
+  },
+  "allowed_experimental_dimensions": [
+    "model_family",
+    "hyperparameters",
+    "feature_representation",
+    "feature_subset",
+    "sample_weighting",
+    "training_objective",
+    "regularization"
+  ],
+  "phase_scope": {
+    "generate_challengers": true,
+    "collect_comparative_evidence": true,
+    "promote_new_incumbent": false
+  }
+}
