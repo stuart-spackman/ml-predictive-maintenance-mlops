@@ -1,0 +1,42 @@
+{
+  "all_required_gates_passed": true,
+  "candidate": {
+    "model_family": "ExtraTreesRegressor",
+    "source_artifact": "models:/m-6edd32280f314aa4ae51e9489ae23303",
+    "source_run_id": "3f295e0647d74d9b880ef5d3b2a54e4c",
+    "source_run_status": "FINISHED",
+    "version": "3"
+  },
+  "champion_alias_after_decision": "3",
+  "decision": "approved",
+  "deployment_cutover_performed": false,
+  "evidence_sha256": {
+    "reports/phase_31_experiment_ledger.csv": "2e279b2e268d992763b5d63224d4a46ebe0cd6db6c5b1a7ae38e9fd883ad2549",
+    "reports/phase_31_experiment_manifest.json": "bd9af242857d0edb88461932d4277dc9890f8443068b3bedb8fc7839b012aad1",
+    "reports/phase_31_handoff.json": "0ff87d694374a17f410656374c22901f5702e59281e32118e6866b4c42b38df6",
+    "reports/phase_32_promotion_contract.json": "7de468e6bc1db6196723bfdbc83eaf9f6b92667c0574189a0d2b9b822b07faa4",
+    "reports/phase_32_tg2_gate_results.json": "ca481cf017fa94ec5f99f9f58edb3a12897970fec2b37523767aaed5603b068d",
+    "reports/phase_32_tg3_compatibility_results.json": "ac1937b55cda57e3778b066eceba03fce6713814d91c2034f35c73c12a38779a"
+  },
+  "gate_results": {
+    "artifact_feature_compatibility": true,
+    "candidate_identity": true,
+    "final_pip_check": true,
+    "final_pytest": true,
+    "predictive_performance": true,
+    "provenance_versioning": true,
+    "serving_inference_compatibility": true,
+    "software_quality": true
+  },
+  "git": {
+    "commit": "aa8f5bb27953210b523cfaa88db95768e5850763",
+    "dirty": true
+  },
+  "phase": "3.2",
+  "previous_incumbent": {
+    "model_family": "RandomForestRegressor",
+    "version": "4"
+  },
+  "promotion_performed": true,
+  "registered_model": "fd001-rul"
+}

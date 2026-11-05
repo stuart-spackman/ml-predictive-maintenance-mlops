@@ -33,3 +33,9 @@ mlruns/
 mlartifacts/
 .venv-repro/
 
+# Local MLflow state
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal
+mlartifacts/
+mlruns/

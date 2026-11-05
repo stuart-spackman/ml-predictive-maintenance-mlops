@@ -1,0 +1,3 @@
+lifecycle_role,model_family,training_objective,feature_count,pooled_oof_rmse,pooled_oof_mae,status
+incumbent,RandomForestRegressor,unweighted_rows,36,37.83457213734644,26.62445294884782,currently_served
+challenger,ExtraTreesRegressor,unweighted_rows,36,37.47259616656695,26.33739448397378,advance_to_phase_32

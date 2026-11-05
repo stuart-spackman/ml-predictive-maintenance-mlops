@@ -1,0 +1,65 @@
+{
+  "phase": "3.2",
+  "name": "Model Evaluation, Versioning, and Promotion",
+
+  "source_handoff": "reports/phase_31_handoff.json",
+
+  "registered_model_name": "fd001-rul",
+
+  "incumbent": {
+    "model_family": "RandomForestRegressor",
+    "role": "champion",
+    "served_artifact": "reports/phase_16_final_fitted_model.joblib"
+  },
+
+  "challenger": {
+    "model_family": "ExtraTreesRegressor",
+    "feature_count": 36,
+    "training_objective": "unweighted_rows",
+    "hyperparameters": {
+      "n_estimators": 300,
+      "max_depth": 20,
+      "max_features": "sqrt",
+      "min_samples_leaf": 2,
+      "min_samples_split": 5
+    }
+  },
+
+  "promotion_gates": {
+    "candidate_identity_matches_phase31_handoff": true,
+    "challenger_primary_metric_beats_incumbent": true,
+    "artifact_contract_checks_required": true,
+    "serving_compatibility_checks_required": true,
+    "existing_test_suite_must_pass": true,
+    "mlflow_version_and_lineage_required": true,
+    "official_test_must_not_drive_candidate_selection": true
+  },
+
+  "primary_metric": {
+    "name": "pooled_oof_rmse",
+    "direction": "lower_is_better"
+  },
+
+  "registry_policy": {
+    "champion_alias": "champion",
+    "candidate_validation_tag": "validation_status",
+    "pending_value": "pending",
+    "passed_value": "passed",
+    "rejected_value": "rejected"
+  },
+
+  "promotion_rule": {
+    "all_required_gates_must_pass": true,
+    "promotion_changes_champion_reference": true,
+    "promotion_does_not_delete_previous_incumbent": true
+  },
+
+  "scope": {
+    "new_hyperparameter_search_allowed": false,
+    "new_feature_search_allowed": false,
+    "new_weighting_experiments_allowed": false,
+    "fit_candidate_artifact_allowed": true,
+    "register_model_versions_allowed": true,
+    "promotion_allowed_only_after_gate_evaluation": true
+  }
+}

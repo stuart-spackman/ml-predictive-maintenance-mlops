@@ -1,0 +1,26 @@
+{
+  "candidate": {
+    "model_family": "ExtraTreesRegressor",
+    "validation_status": "pending",
+    "version": "3"
+  },
+  "champion": {
+    "alias": "champion",
+    "model_family": "RandomForestRegressor",
+    "registry_import_type": "historical_bootstrap",
+    "version": "4"
+  },
+  "gates": {
+    "candidate_identity": {
+      "passed": true
+    },
+    "predictive_performance": {
+      "candidate_reference_rmse": 37.47259616656695,
+      "challenger_minus_incumbent_rmse": -0.36197597077948984,
+      "incumbent_reference_rmse": 37.83457213734644,
+      "passed": true
+    }
+  },
+  "promotion_performed": false,
+  "registered_model": "fd001-rul"
+}

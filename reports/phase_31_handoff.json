@@ -1,0 +1,62 @@
+{
+  "challenger": {
+    "feature_contract": "reports/phase_16_locked_model_spec.json",
+    "feature_count": 36,
+    "model_family": "ExtraTreesRegressor",
+    "recipe": {
+      "hyperparameters": {
+        "max_depth": 20,
+        "max_features": "sqrt",
+        "min_samples_leaf": 2,
+        "min_samples_split": 5
+      },
+      "model_family": "ExtraTreesRegressor",
+      "n_estimators": 300,
+      "random_state": 42,
+      "source": "Modal best parameter configuration from Phase 3.1 TG2 nested CV."
+    },
+    "reference_pooled_oof_mae": 26.33739448397378,
+    "reference_pooled_oof_rmse": 37.47259616656695,
+    "status": "experimental_challenger",
+    "training_objective": "unweighted_rows"
+  },
+  "comparison": {
+    "challenger_lower_rmse": true,
+    "challenger_minus_incumbent_rmse": -0.36197597077948984,
+    "challenger_rmse_improvement_percent": 0.9567333534669049
+  },
+  "evidence": {
+    "experiment_contract": "reports/phase_31_experiment_contract.json",
+    "experiment_ledger": "reports/phase_31_experiment_ledger.csv",
+    "experiment_manifest": "reports/phase_31_experiment_manifest.json",
+    "model_comparison": "reports/phase_31_handoff_model_comparison.csv",
+    "tg1_summary": "reports/phase_31_tg1_challenger_summary.csv",
+    "tg2_summary": "reports/phase_31_tg2_tuning_summary.csv",
+    "tg3_summary": "reports/phase_31_tg3_weighting_summary.csv"
+  },
+  "handoff_to": "Phase 3.2 \u2014 Model Evaluation, Versioning, and Promotion",
+  "important_limitations": [
+    "Phase 3.1 development evidence has participated in challenger selection.",
+    "The official test set must not be used for additional challenger tuning.",
+    "A modest RMSE advantage does not by itself authorize production promotion.",
+    "No challenger fitted artifact has replaced the incumbent artifact."
+  ],
+  "incumbent": {
+    "feature_count": 36,
+    "fit_record": "reports/phase_16_final_fit_record.json",
+    "fitted_artifact": "reports/phase_16_final_fitted_model.joblib",
+    "model_family": "RandomForestRegressor",
+    "reference_pooled_oof_mae": 26.62445294884782,
+    "reference_pooled_oof_rmse": 37.83457213734644,
+    "status": "currently_served"
+  },
+  "phase": "3.1",
+  "phase31_conclusions": [
+    "Default challenger families did not beat the incumbent during TG1 screening.",
+    "Bounded nested grouped-CV tuning made Extra Trees a credible challenger.",
+    "The fixed Extra Trees recipe retained nearly all of the tuned procedure's performance.",
+    "Engine-balanced weighting did not improve the declared primary pooled OOF RMSE and was therefore rejected.",
+    "The unweighted fixed Extra Trees recipe advances to Phase 3.2 for formal promotion evaluation."
+  ],
+  "phase31_decision": "Advance the fixed unweighted Extra Trees challenger to Phase 3.2. Do not promote or alter serving during Phase 3.1."
+}

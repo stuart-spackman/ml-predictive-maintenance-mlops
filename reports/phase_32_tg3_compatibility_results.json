@@ -1,0 +1,30 @@
+{
+  "candidate_model_uri": "models:/fd001-rul/3",
+  "candidate_version": "3",
+  "gates": {
+    "artifact_feature_compatibility": {
+      "feature_count": 36,
+      "feature_names_and_order_match": true,
+      "passed": true
+    },
+    "serving_inference_compatibility": {
+      "model_input_shape": [
+        1,
+        36
+      ],
+      "passed": true,
+      "pipeline_matches_direct_model": true,
+      "prediction_deterministic": true,
+      "prediction_finite": true,
+      "raw_history_cycles": 20
+    },
+    "software_quality": {
+      "passed": true,
+      "pip_check_return_code": 0,
+      "pytest_return_code": 0
+    }
+  },
+  "promotion_performed": false,
+  "registered_model": "fd001-rul",
+  "validation_status": "pending"
+}
