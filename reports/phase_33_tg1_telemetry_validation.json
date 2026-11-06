@@ -1,0 +1,25 @@
+{
+  "latest_request_id": "6ac8b8f2-c518-4e9c-87b1-128398f71813",
+  "phase": "3.3",
+  "prediction_event": {
+    "current_cycle": 20,
+    "engine_id": 1,
+    "inference_latency_ms": 50.23404100211337,
+    "model_input_feature_count": 36,
+    "predicted_rul_finite": true,
+    "served_model": {
+      "locked_spec_path": "reports/phase_16_locked_model_spec.json",
+      "locked_spec_sha256": "34cdf9c7b844f71dba555b0bdc6206ee849eee7e5634e2ee4a8d6d4ed99f4c8e",
+      "model_artifact_path": "reports/phase_16_final_fitted_model.joblib",
+      "model_artifact_sha256": "bb5825d198d6eda27d1e720e67837a469ac7d126dfdd2e832bd9b5374514596b",
+      "source": "phase_16_frozen_joblib"
+    }
+  },
+  "service_event": {
+    "latency_ms": 69.92725003510714,
+    "status_code": 200,
+    "success": true
+  },
+  "task_group": "TG1",
+  "telemetry_validation": "passed"
+}

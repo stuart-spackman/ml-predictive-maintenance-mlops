@@ -11,6 +11,12 @@ What is the difference between model promotion and model deployment in our proje
 
 *As for why moving `model:/fd001-rul@champion` from the Random Forest version to the Extra Trees version does not automatically mean the FastAPI service is now serving Extra Trees, changing the MLflow pointer is just one of several things that needs to happen in order for the FastAPI service to now serve Extra Trees. There are also several changes that need to happen in the codebase of our application.*
 
+Promotion -> Which model is approved? 
+
+Deployment -> Which model does the running application actually load? 
+
+Promotion changes the authoritative lifecycle reference in MLflow. Deployment changes the artifact-loading path used by the application. Our FastAPI service still loads its existing frozen artifact rather than resolving the MLflow `champion` alias, so registry promotion alone cannot change the model being served. 
+
 ### Question 2
 What does the final provenance gate establish, and how do the candidate's MLflow model version, source `run_id`, source artifact, Phase 3.1/3.2 evidence files, evidence hashes, and Git state work together to make the promotion decision traceable?
 
@@ -25,6 +31,25 @@ What does the final provenance gate establish, and how do the candidate's MLflow
 
 *As for how the candidate's MLflow model version, source `run_id`, source artifact, Phase 3.1/3.2 evidence files, evidence hashes, and Git state work together to make the promotion decision traceable, they give a comprehensive list of which evidence bytes were part of the decision record of promoting the model. The principle at play here is that we want to show integrity in addition to correctness.*
 
+We need to be able to tell the story of how the model got there. 
+
+Correctness -> Is the decision/model actually good? 
+
+Traceability -> Can we reconstruct what produced and justified it? 
+
+Integrity -> Can we identify whether the exact recorded evidence changed? 
+
+There is a provenance chain that makes the decision auditable and reproducible enough to investigate later. 
+registered model version
+-> source run_id
+-> logged model artifact
+-> frozen recipe/governance artifacts
+-> Phase 3.1 evidence
+-> TG2/TG3 gate evidence 
+-> hashes identify exact evidence files
+-> Git commit + dirty state identify code context
+-> TG4 decision
+
 ### Question 3
 Why does TG4 recheck the current champion and rerun the software quality gate immediately before promotion, and what purpose does rollback serve if part of the registry transition fails after mutation has begun?
 
@@ -33,3 +58,40 @@ Why does TG4 recheck the current champion and rerun the software quality gate im
 *TG4 rechecks the current champion and reruns the software quality gate immediately before promotion because decision evidence can become stale. We don't want to assume that nothing important in our codebase changed in between TG2 and TG4, for example. There are situations where people manually change aliases without telling other stake holders. The principle at play here is that we need to verify the world still matches the assumptions under which we're making the decision.*
 
 *As for what purpose the rollback serves if part of the registry transition failes after mutation has begun, we don't want to leave open the possibility that verification crashes and we're left with an ambiguous registry state. The principle at play here is that we want to implement fail-safe release engineering.*
+
+We need to verify the world still matches the assumptions under which we're making the decision.
+
+Stages of rollback: 
+mutation begins 
+-> something fails halfway through
+-> restore previously accepted state
+
+Rollback doesn't guarantee that every imaginable external side effect can always be undone.
+
+### Ideas to Retain 
+
+* Promotion is a governed lifestyle decision; deployment is the separate act of changing what a running system actually loads. 
+
+* Provenance lets you trace a model decision backward from model version to source run, evidence, configuration, and repository state. 
+
+* A promotion process should revalidate important assumptions immediately before mutating production-oriented state rather than blindly trusting stale evidence. 
+
+* Aliases make lifecycle roles movable while preserving immutable model-version history. 
+
+* Rollback protects the previously accepted champion if the promotion operation itself fails partway through. 
+
+* The previous incumbent remains valuable historical state after promotion; promotion is not deletion.
+
+### More Ideas to Retain 
+
+* Promotion changes governance state; deployment changes runtime state. 
+
+* An MLflow alias does nothing to a FastAPI application unless the application's loading mechanism actually resolves that alias. 
+
+* Provenance establishes traceability; hashes establish evidence identity/integrity; neither automatically establishes scientific correctness. 
+
+* Immediately before a consequential mutation, revalidate the assumptions that authorize it. 
+
+* Rollback exists to restore a known-good lifecycle state when a multi-step promotion fails partway through. 
+
+* A promoted model can be the registry champion before it has actually been deployed into the runnign service.

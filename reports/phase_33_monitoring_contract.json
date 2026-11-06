@@ -1,0 +1,82 @@
+{
+  "phase": "3.3",
+  "name": "Monitoring, Logging, and Drift Detection",
+
+  "monitoring_unit": {
+    "name": "prediction_event",
+    "definition": "One inference request resulting in one latest-cycle RUL prediction.",
+    "raw_history_is_not_the_monitoring_unit": true
+  },
+
+  "model_identity_policy": {
+    "record_actual_served_model": true,
+    "do_not_infer_served_model_from_registry_alias": true,
+    "registry_champion_and_deployed_model_are_distinct_concepts": true
+  },
+
+  "monitoring_layers": {
+    "service_health": [
+      "request_success",
+      "request_latency",
+      "inference_error"
+    ],
+
+    "prediction_health": [
+      "finite_prediction",
+      "prediction_distribution"
+    ],
+
+    "data_health": [
+      "schema_validity",
+      "model_input_feature_distribution"
+    ]
+  },
+
+  "drift_semantics": {
+    "schema_drift": "Input structure or required field contract changes.",
+
+    "data_drift": "The model-input distribution P(X) changes relative to the reference population.",
+
+    "prediction_drift": "The prediction distribution P(y_hat) changes relative to the reference population.",
+
+    "concept_or_performance_drift": "The relationship between inputs and outcomes changes or observed predictive metrics degrade; outcome labels are required to establish this directly."
+  },
+
+  "claim_boundaries": {
+    "unlabeled_data_drift_proves_accuracy_degradation": false,
+    "prediction_drift_proves_accuracy_degradation": false,
+    "labeled_outcomes_required_for_direct_performance_monitoring": true
+  },
+
+  "reference_policy": {
+    "reference_population": "reference_prediction_event_population",
+    "observation_semantics_must_match_production": true,
+    "blind_comparison_to_all_training_rows": false
+  },
+
+  "telemetry_policy": {
+    "record_timestamp": true,
+    "record_request_id": true,
+    "record_served_model_identity": true,
+    "record_engine_id": true,
+    "record_current_cycle": true,
+    "record_predicted_rul": true,
+    "record_latency": true,
+    "record_success_or_failure": true,
+    "record_model_input_features": true,
+    "recompute_features_inside_monitoring": false
+  },
+
+  "alert_policy": {
+    "drift_is_investigation_signal": true,
+    "drift_automatically_triggers_retraining": false,
+    "metrics_and_thresholds_defined_before_result_interpretation": true
+  },
+
+  "scope": {
+    "local_structured_telemetry": true,
+    "local_drift_analysis": true,
+    "automatic_retraining": false,
+    "distributed_monitoring_infrastructure": false
+  }
+}

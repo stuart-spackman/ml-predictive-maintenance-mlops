@@ -31,6 +31,14 @@ from predictive_maintenance.api.adapters import (
     prediction_result_to_response,
 )
 
+from time import (
+    perf_counter,
+)
+
+from predictive_maintenance.monitoring.telemetry import (
+    build_prediction_event,
+)
+
 router = APIRouter()
 
 # ------------------------------------------------------------
@@ -95,6 +103,7 @@ def get_model_metadata(
 )
 def predict_rul(
     prediction_request: PredictionRequest,
+    http_request: Request,
     pipeline: InferencePipelineDependency,
 ) -> PredictionResponse:
     """
@@ -114,8 +123,86 @@ def predict_rul(
     )
 
 
-    result = pipeline.predict(
-        history_df
+    inference_started = (
+        perf_counter()
+    )
+
+
+    result = (
+        pipeline.predict(
+            history_df
+        )
+    )
+
+
+    inference_latency_ms = (
+        (
+            perf_counter()
+            - inference_started
+        )
+        * 1000.0
+    )
+
+
+    # Use the existing inference pipeline as the sole
+    # feature-engineering authority.
+    model_input = (
+        pipeline.build_model_input(
+            history_df
+        )
+    )
+
+
+    telemetry_store = (
+        http_request
+        .app
+        .state
+        .telemetry_store
+    )
+
+
+    served_model_identity = (
+        http_request
+        .app
+        .state
+        .served_model_identity
+    )
+
+
+    telemetry_store.try_append(
+        build_prediction_event(
+            request_id=(
+                http_request
+                .state
+                .request_id
+            ),
+    
+            model_identity=(
+                served_model_identity
+            ),
+    
+            engine_id=(
+                result.engine_id
+            ),
+    
+            current_cycle=(
+                result.current_cycle
+            ),
+    
+            predicted_rul=(
+                result.predicted_rul
+            ),
+    
+            inference_latency_ms=(
+                inference_latency_ms
+            ),
+    
+            model_input=(
+                model_input
+                .iloc[0]
+                .to_dict()
+            ),
+        )
     )
 
 

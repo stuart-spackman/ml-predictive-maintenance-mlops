@@ -39,3 +39,6 @@ mlflow.db-shm
 mlflow.db-wal
 mlartifacts/
 mlruns/
+
+# Local runtime telemetry
+runtime/telemetry/
