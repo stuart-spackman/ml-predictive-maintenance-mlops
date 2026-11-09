@@ -1,0 +1,52 @@
+{
+  "phase": "3.3",
+  "task_group": "TG2",
+
+  "metric": {
+    "primary": "population_stability_index",
+    "abbreviation": "PSI",
+    "reference_bin_strategy": "reference_quantiles",
+    "target_bin_count": 10,
+    "epsilon": 1e-06
+  },
+
+  "thresholds": {
+    "stable_upper_exclusive": 0.10,
+    "warning_lower_inclusive": 0.10,
+    "alert_lower_inclusive": 0.25
+  },
+
+  "window_policy": {
+    "minimum_prediction_events": 30
+  },
+
+  "reference_sampling": {
+    "population": "FD001 historical training engines",
+    "observation": "latest-cycle prediction event generated from complete prefix history",
+    "checkpoint_step_cycles": 10,
+    "include_final_cycle": true,
+    "use_future_cycles_in_features": false
+  },
+
+  "monitored_distributions": {
+    "model_input_features": "all 36 locked model features",
+    "prediction": "predicted_rul"
+  },
+
+  "claim_boundaries": {
+    "feature_psi_measures": "input-distribution change",
+    "prediction_psi_measures": "prediction-distribution change",
+    "psi_proves_accuracy_degradation": false,
+    "labels_required_for_direct_accuracy_monitoring": true
+  },
+
+  "baseline_versioning": {
+    "bind_reference_to_actual_served_artifact": true,
+    "rebuild_if_feature_contract_changes": true,
+    "rebuild_prediction_reference_if_served_model_changes": true
+  },
+
+  "retraining_policy": {
+    "drift_automatically_triggers_retraining": false
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "artifacts": {
+    "drift_policy": "reports/phase_33_drift_policy.json",
+    "reference_bins": "reports/phase_33_reference_bins.json",
+    "reference_events": "reports/phase_33_reference_prediction_events.csv"
+  },
+  "drift_metric": {
+    "maximum_reference_self_psi": 0.0,
+    "name": "population_stability_index",
+    "reference_bins_frozen": true,
+    "target_bin_count": 10
+  },
+  "feature_contract": {
+    "feature_count": 36,
+    "feature_names": [
+      "cycles",
+      "op_setting_1",
+      "op_setting_2",
+      "sensor_measurement_2",
+      "sensor_measurement_3",
+      "sensor_measurement_4",
+      "sensor_measurement_6",
+      "sensor_measurement_7",
+      "sensor_measurement_8",
+      "sensor_measurement_9",
+      "sensor_measurement_11",
+      "sensor_measurement_12",
+      "sensor_measurement_13",
+      "sensor_measurement_14",
+      "sensor_measurement_15",
+      "sensor_measurement_17",
+      "sensor_measurement_20",
+      "sensor_measurement_21",
+      "sensor_measurement_4_lag_1",
+      "sensor_measurement_7_lag_1",
+      "sensor_measurement_9_lag_1",
+      "sensor_measurement_11_lag_1",
+      "sensor_measurement_12_lag_1",
+      "sensor_measurement_14_lag_1",
+      "sensor_measurement_4_diff_1",
+      "sensor_measurement_7_diff_1",
+      "sensor_measurement_9_diff_1",
+      "sensor_measurement_11_diff_1",
+      "sensor_measurement_12_diff_1",
+      "sensor_measurement_14_diff_1",
+      "sensor_measurement_4_rolling_mean_5",
+      "sensor_measurement_7_rolling_mean_5",
+      "sensor_measurement_9_rolling_mean_5",
+      "sensor_measurement_11_rolling_mean_5",
+      "sensor_measurement_12_rolling_mean_5",
+      "sensor_measurement_14_rolling_mean_5"
+    ]
+  },
+  "phase": "3.3",
+  "reference_population": {
+    "checkpoint_step_cycles": 10,
+    "engine_count": 100,
+    "event_count": 2106,
+    "maximum_cycle": 362,
+    "minimum_cycle": 10
+  },
+  "served_model": {
+    "locked_spec_path": "reports/phase_16_locked_model_spec.json",
+    "locked_spec_sha256": "34cdf9c7b844f71dba555b0bdc6206ee849eee7e5634e2ee4a8d6d4ed99f4c8e",
+    "model_artifact_path": "reports/phase_16_final_fitted_model.joblib",
+    "model_artifact_sha256": "bb5825d198d6eda27d1e720e67837a469ac7d126dfdd2e832bd9b5374514596b",
+    "source": "phase_16_frozen_joblib"
+  },
+  "task_group": "TG2"
+}
