@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "monitoring_report": "reports/phase_33_tg3_monitoring_report.csv",
+    "monitoring_summary": "reports/phase_33_tg3_monitoring_summary.json"
+  },
+  "drift_injection": {
+    "alert_columns": [
+      "cycles",
+      "op_setting_1",
+      "op_setting_2",
+      "predicted_rul"
+    ],
+    "alert_count": 4,
+    "distribution_count": 37,
+    "injected_distributions": {
+      "cycles": {
+        "reference_max": 362.0,
+        "reference_min": 10.0,
+        "shift": 704.0,
+        "type": "additive_shift"
+      },
+      "op_setting_1": {
+        "reference_max": 0.0083,
+        "reference_min": -0.0074,
+        "shift": 0.0314,
+        "type": "additive_shift"
+      },
+      "op_setting_2": {
+        "reference_max": 0.0006,
+        "reference_min": -0.0006,
+        "shift": 0.0024,
+        "type": "additive_shift"
+      },
+      "predicted_rul": {
+        "note": "Synthetic prediction-distribution injection for detector validation; not regenerated from the estimator.",
+        "reference_max": 206.33964682370265,
+        "reference_min": 4.8141768086631425,
+        "shift": 403.050940030079,
+        "type": "additive_shift"
+      }
+    },
+    "maximum_psi": 12.429352335658528,
+    "stable_count": 33,
+    "warning_columns": [],
+    "warning_count": 0
+  },
+  "phase": "3.3",
+  "policy": {
+    "alert_lower_inclusive": 0.25,
+    "metric": "population_stability_index",
+    "minimum_prediction_events": 30,
+    "stable_upper_exclusive": 0.1,
+    "warning_lower_inclusive": 0.1
+  },
+  "purpose": "Validate the drift-monitoring system against known stable and deliberately drifted distributions.",
+  "reference": {
+    "event_count": 2106,
+    "monitored_distribution_count": 37,
+    "served_model": {
+      "locked_spec_path": "reports/phase_16_locked_model_spec.json",
+      "locked_spec_sha256": "34cdf9c7b844f71dba555b0bdc6206ee849eee7e5634e2ee4a8d6d4ed99f4c8e",
+      "model_artifact_path": "reports/phase_16_final_fitted_model.joblib",
+      "model_artifact_sha256": "bb5825d198d6eda27d1e720e67837a469ac7d126dfdd2e832bd9b5374514596b",
+      "source": "phase_16_frozen_joblib"
+    }
+  },
+  "stable_control": {
+    "alert_columns": [],
+    "alert_count": 0,
+    "distribution_count": 37,
+    "maximum_psi": 0.0,
+    "stable_count": 37,
+    "warning_columns": [],
+    "warning_count": 0
+  },
+  "task_group": "TG3",
+  "validation": {
+    "all_injected_distributions_alerted": true,
+    "automatic_retraining_triggered": false,
+    "drift_proves_accuracy_degradation": false,
+    "stable_control_remained_stable": true
+  }
+}

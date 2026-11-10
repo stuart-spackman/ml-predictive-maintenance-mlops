@@ -163,3 +163,41 @@ def test_classify_psi(
         )
         == expected
     )
+
+def test_large_distribution_shift_classifies_as_alert():
+
+    reference = np.arange(
+        1,
+        101,
+        dtype=float,
+    )
+
+
+    current = (
+        reference
+        + 300.0
+    )
+
+
+    cutpoints = (
+        build_reference_cutpoints(
+            reference
+        )
+    )
+
+
+    psi = (
+        population_stability_index(
+            reference,
+            current,
+            cutpoints=cutpoints,
+        )
+    )
+
+
+    assert (
+        classify_psi(
+            psi
+        )
+        == "alert"
+    )

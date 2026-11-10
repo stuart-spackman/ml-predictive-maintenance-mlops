@@ -42,3 +42,6 @@ mlruns/
 
 # Local runtime telemetry
 runtime/telemetry/
+
+# Local runtime monitoring state
+runtime/monitoring/

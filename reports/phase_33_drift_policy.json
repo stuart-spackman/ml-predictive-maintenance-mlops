@@ -17,7 +17,9 @@
   },
 
   "window_policy": {
-    "minimum_prediction_events": 30
+    "minimum_prediction_events": 30,
+    "evaluation_window_prediction_events": 30,
+    "selection": "latest_prediction_events"
   },
 
   "reference_sampling": {

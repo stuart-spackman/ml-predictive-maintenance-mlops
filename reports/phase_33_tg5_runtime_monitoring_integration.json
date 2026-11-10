@@ -1,0 +1,24 @@
+{
+  "claim_boundaries": {
+    "alert_automatically_triggers_retraining": false,
+    "alert_is_diagnosis": false,
+    "alert_proves_accuracy_degradation": false
+  },
+  "distribution_count_when_evaluable": 37,
+  "observed_state_at_validation": "insufficient_data",
+  "phase": "3.3",
+  "possible_states": [
+    "reference_incompatible",
+    "insufficient_data",
+    "stable",
+    "warning",
+    "alert"
+  ],
+  "reference_source": "reports/phase_33_reference_prediction_events.csv",
+  "runtime_monitoring_integration": "implemented",
+  "runtime_status_artifact": "runtime/monitoring/current_status.json",
+  "task_group": "TG5",
+  "telemetry_source": "runtime/telemetry/events.jsonl",
+  "window_size": 30,
+  "window_strategy": "latest_prediction_events"
+}
