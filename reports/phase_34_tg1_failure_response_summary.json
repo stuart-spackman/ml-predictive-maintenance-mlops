@@ -1,0 +1,22 @@
+{
+  "artifacts": {
+    "failure_response_matrix": "reports/phase_34_failure_response_matrix.csv",
+    "retraining_contract": "reports/phase_34_retraining_contract.json"
+  },
+  "failure_family_count": 9,
+  "failure_mode_count": 14,
+  "phase": "3.4",
+  "policy_checks": {
+    "non_model_failures_do_not_authorize_retraining": true,
+    "persistent_drift_is_conditional": true,
+    "retrained_model_remains_challenger": true,
+    "validated_performance_degradation_can_support_retraining": true
+  },
+  "retraining_relevance_counts": {
+    "conditional": 2,
+    "no": 11,
+    "yes": 1
+  },
+  "task_group": "TG1",
+  "validation": "passed"
+}

@@ -1,0 +1,71 @@
+{
+  "phase": "3.4",
+  "name": "Retraining Strategy and Production Failure Modes",
+
+  "decision_boundaries": {
+    "drift_detection_is_retraining_authorization": false,
+    "retraining_is_promotion": false,
+    "promotion_is_deployment": false,
+    "retrained_model_is_a_challenger": true
+  },
+
+  "monitoring_response_policy": {
+    "reference_incompatible": "reconcile serving identity or rebuild/version the monitoring reference",
+    "insufficient_data": "collect additional compatible prediction events",
+    "stable": "continue monitoring",
+    "warning": "investigate and continue monitoring",
+    "alert": "investigate promptly; do not automatically retrain"
+  },
+
+  "retraining_eligibility": {
+    "confirmed_predictive_degradation_can_justify_retraining": true,
+    "persistent_relevant_drift_with_representative_labeled_data_can_justify_retraining": true,
+    "validated_training_or_target_correction_can_justify_retraining": true,
+    "single_unlabeled_drift_alert_is_sufficient": false,
+    "service_failure_is_sufficient": false,
+    "telemetry_failure_is_sufficient": false,
+    "reference_incompatibility_is_sufficient": false,
+    "calendar_age_alone_is_sufficient": false
+  },
+
+  "investigation_before_retraining": {
+    "verify_served_model_identity": true,
+    "verify_feature_pipeline": true,
+    "verify_input_data_quality": true,
+    "verify_outcome_label_quality_when_available": true,
+    "verify_change_is_relevant_to_model_learning": true
+  },
+
+  "retraining_data_policy": {
+    "new_training_data_must_be_representative": true,
+    "new_training_data_requires_valid_labels": true,
+    "group_boundary_remains_engine": true,
+    "temporal_causality_must_be_preserved": true,
+    "future_information_leakage_allowed": false,
+    "incumbent_artifact_mutated_in_place": false
+  },
+
+  "governance": {
+    "retrained_artifact_enters_as_challenger": true,
+    "evaluation_required": true,
+    "compatibility_validation_required": true,
+    "software_quality_gate_required": true,
+    "provenance_required": true,
+    "promotion_decision_required": true,
+    "deployment_cutover_is_separate": true
+  },
+
+  "claim_boundaries": {
+    "drift_proves_performance_degradation": false,
+    "performance_degradation_always_means_retrain": false,
+    "newer_data_guarantees_better_model": false,
+    "successful_retraining_guarantees_promotion": false
+  },
+
+  "scope": {
+    "automatic_retraining": false,
+    "scheduled_calendar_retraining": false,
+    "distributed_retraining_orchestration": false,
+    "evidence_driven_retraining_policy": true
+  }
+}
