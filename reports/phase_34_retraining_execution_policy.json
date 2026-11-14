@@ -1,0 +1,45 @@
+{
+  "phase": "3.4",
+  "task_group": "TG3",
+
+  "execution_boundary": {
+    "retraining_authorization_creates_deployment_authority": false,
+    "retraining_produces_new_challenger": true,
+    "incumbent_mutated_in_place": false,
+    "incumbent_remains_serving_during_candidate_development": true
+  },
+
+  "project_reality": {
+    "genuine_new_labeled_production_data_available": false,
+    "real_production_retraining_claim_allowed": false,
+    "workflow_simulation_allowed": true
+  },
+
+  "challenger_requirements": {
+    "new_artifact_identity_required": true,
+    "training_provenance_required": true,
+    "grouped_evaluation_required": true,
+    "temporal_causality_required": true,
+    "future_leakage_allowed": false,
+    "serving_compatibility_validation_required": true,
+    "software_quality_gate_required": true
+  },
+
+  "promotion_boundary": {
+    "retraining_moves_champion_alias": false,
+    "retraining_changes_fastapi_serving": false,
+    "candidate_must_pass_promotion_gates": true,
+    "deployment_remains_separate": true
+  },
+
+  "test_policy": {
+    "official_test_used_for_repeated_candidate_selection": false,
+    "official_test_is_not_fresh": true
+  },
+
+  "rollback_policy": {
+    "preserve_prior_known_good_artifact": true,
+    "preserve_prior_model_identity": true,
+    "rollback_requires_retraining": false
+  }
+}

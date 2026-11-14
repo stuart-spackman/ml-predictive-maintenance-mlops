@@ -1,0 +1,52 @@
+{
+  "phase": "3.4",
+  "task_group": "TG2",
+
+  "performance_monitoring": {
+    "primary_metric": "rmse",
+    "supporting_metric": "mae",
+    "minimum_labeled_prediction_events": 30,
+    "evaluation_window_labeled_events": 30
+  },
+
+  "reference_policy": {
+    "population": "historical_labeled_prediction_event_population",
+    "observation_semantics_must_match_production": true,
+    "blind_use_of_any_prior_rmse": false
+  },
+
+  "degradation_policy": {
+    "relative_rmse_increase_threshold": 0.10,
+    "comparison": "current_rmse >= reference_rmse * (1 + threshold)",
+    "threshold_is_operational_policy_not_universal_law": true
+  },
+
+  "label_policy": {
+    "labels_must_be_trustworthy_before_performance_evaluation": true,
+    "target_semantics_must_match_model_development": true,
+    "bad_or_misaligned_labels_block_performance_conclusions": true
+  },
+
+  "performance_states": [
+    "label_quality_failure",
+    "insufficient_labels",
+    "performance_stable",
+    "performance_degraded"
+  ],
+
+  "retraining_investigation_checks": [
+    "served_model_identity_verified",
+    "feature_pipeline_verified",
+    "input_data_quality_verified",
+    "outcome_label_quality_verified",
+    "sample_representative",
+    "new_labeled_training_data_available"
+  ],
+
+  "decision_boundaries": {
+    "performance_degraded_automatically_retrains": false,
+    "eligible_to_retrain_means_fit_new_challenger": true,
+    "eligible_to_retrain_means_promote": false,
+    "eligible_to_retrain_means_deploy": false
+  }
+}

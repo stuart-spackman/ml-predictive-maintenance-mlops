@@ -1,0 +1,60 @@
+{
+  "claim_boundaries": {
+    "drift_proves_performance_degradation": false,
+    "performance_degradation_automatically_retrains": false,
+    "promotion_means_deployment": false,
+    "registry_champion_proves_actual_serving_identity": false,
+    "retraining_means_promotion": false
+  },
+  "decision_chain": [
+    "observe production signal",
+    "identify failing layer",
+    "investigate cause",
+    "obtain trustworthy delayed labels when required",
+    "evaluate direct performance",
+    "decide whether retraining is justified",
+    "fit a separate challenger when real evidence and data exist",
+    "evaluate and validate challenger",
+    "make promotion decision",
+    "make separate deployment decision"
+  ],
+  "name": "Retraining Strategy and Production Failure Modes",
+  "part_3_handoff": {
+    "lifecycle_summary": "Model experimentation, governed promotion, runtime monitoring, delayed-label performance reasoning, and evidence-driven retraining are treated as separate but connected lifecycle stages.",
+    "name": "Model Improvement and Production Thinking",
+    "next_phase": "4.1",
+    "next_phase_name": "Documentation & Technical Storytelling",
+    "part": "3",
+    "status": "complete"
+  },
+  "phase": "3.4",
+  "project_reality": {
+    "genuine_new_labeled_production_data_available": false,
+    "incumbent_preserved": true,
+    "real_production_retraining_performed": false,
+    "retraining_workflow_simulated_and_validated": true
+  },
+  "provenance": {
+    "evidence_sha256": {
+      "reports/phase_34_failure_response_matrix.csv": "351967cfb81f9b673e92a8f1007317149c2c895c69526b8329b6fe464f4456b9",
+      "reports/phase_34_performance_retraining_policy.json": "e319a636ad52f22e1d5ef1f4e56233bd4aeb2e2e5808901173d6171050428177",
+      "reports/phase_34_retraining_contract.json": "96082882288dfbf8bfcc3bed32bfec2229907417da0cb8a8a682ca0dcea0df55",
+      "reports/phase_34_retraining_execution_policy.json": "e8ffa5fcb28a692278adc95e626991548378b32984311fde785e50866d06a8ee",
+      "reports/phase_34_tg1_failure_response_summary.json": "c35df90e9cef2b61018c9f9f37db8f24647c28a96d90c84c332a9f10ea62e3b4",
+      "reports/phase_34_tg2_retraining_decision_validation.json": "570a3a6597e4eae6e63b04e9489e7876bfa78c4b4bef5494c06b02556945c036",
+      "reports/phase_34_tg3_retraining_handoff.json": "ae550ccdad2cbcab141098d529f76d7d6b7635adc64f8f5cf30a8422fe7a2deb"
+    },
+    "git_commit": "03b8bc35186095bbec63fc8d50e3dc6e02f298b1",
+    "git_dirty": true
+  },
+  "status": "complete",
+  "validated_capabilities": {
+    "delayed_label_performance_logic": true,
+    "failure_mode_classification": true,
+    "incumbent_preservation": true,
+    "layer_specific_response_policy": true,
+    "retraining_eligibility_logic": true,
+    "rollback_preconditions_defined": true,
+    "safe_challenger_handoff": true
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "future_real_retraining_sequence": [
+    "obtain representative trustworthy labeled production data",
+    "construct leakage-safe grouped training population",
+    "fit a separate challenger artifact",
+    "estimate challenger performance using grouped evaluation",
+    "validate feature and serving compatibility",
+    "record provenance",
+    "run promotion gates",
+    "make a separate deployment decision"
+  ],
+  "incumbent": {
+    "locked_spec_path": "reports/phase_16_locked_model_spec.json",
+    "locked_spec_sha256_after": "34cdf9c7b844f71dba555b0bdc6206ee849eee7e5634e2ee4a8d6d4ed99f4c8e",
+    "locked_spec_sha256_before": "34cdf9c7b844f71dba555b0bdc6206ee849eee7e5634e2ee4a8d6d4ed99f4c8e",
+    "model_path": "reports/phase_16_final_fitted_model.joblib",
+    "model_sha256_after": "bb5825d198d6eda27d1e720e67837a469ac7d126dfdd2e832bd9b5374514596b",
+    "model_sha256_before": "bb5825d198d6eda27d1e720e67837a469ac7d126dfdd2e832bd9b5374514596b",
+    "unchanged": true
+  },
+  "phase": "3.4",
+  "project_reality": {
+    "actual_new_challenger_fit": false,
+    "genuine_new_labeled_production_data_available": false,
+    "reason": "The project does not possess genuine newly labeled production observations."
+  },
+  "retraining_handoff": {
+    "challenger_fit_authorized": false,
+    "deployment_action": "none",
+    "incumbent_identity": {
+      "locked_spec_sha256": "34cdf9c7b844f71dba555b0bdc6206ee849eee7e5634e2ee4a8d6d4ed99f4c8e",
+      "model_artifact_sha256": "bb5825d198d6eda27d1e720e67837a469ac7d126dfdd2e832bd9b5374514596b"
+    },
+    "incumbent_preserved": true,
+    "reason": "No genuine newly labeled production data is available in this portfolio environment.",
+    "registry_action": "none",
+    "status": "workflow_validated_but_real_fit_blocked"
+  },
+  "safety_boundaries": {
+    "incumbent_mutated": false,
+    "promotion_still_required_after_future_real_fit": true,
+    "real_production_retraining_claimed": false,
+    "registry_alias_moved": false,
+    "serving_cutover_performed": false
+  },
+  "synthetic_decision_branch": {
+    "meaning": "Fit a new challenger; promotion and deployment remain separate decisions.",
+    "retraining_authorized": true,
+    "status": "eligible_to_retrain"
+  },
+  "task_group": "TG3",
+  "validation": "passed",
+  "workflow_type": "retraining_lifecycle_simulation"
+}

@@ -1,0 +1,57 @@
+{
+  "decision_boundaries": {
+    "drift_required_for_retraining": false,
+    "eligible_to_retrain_means_challenger_may_be_fit": true,
+    "eligible_to_retrain_means_deploy": false,
+    "labels_required_for_direct_performance_evidence": true,
+    "performance_degradation_alone_bypasses_investigation": false
+  },
+  "important_claim": "Synthetic values validate decision logic only; they do not represent actual production performance.",
+  "phase": "3.4",
+  "policy": {
+    "minimum_labeled_events": 30,
+    "relative_rmse_degradation_threshold": 0.1
+  },
+  "scenarios": {
+    "degraded_but_investigation_failed": {
+      "failed_checks": [
+        "input_data_quality_verified"
+      ],
+      "retraining_authorized": false,
+      "status": "investigate_before_retraining"
+    },
+    "degraded_performance": {
+      "current_mae": 12.0,
+      "current_rmse": 12.0,
+      "degradation_threshold_rmse": 11.0,
+      "event_count": 30,
+      "performance_evaluated": true,
+      "reference_rmse": 10.0,
+      "relative_rmse_degradation_threshold": 0.1,
+      "status": "performance_degraded"
+    },
+    "eligible_to_retrain": {
+      "meaning": "Fit a new challenger; promotion and deployment remain separate decisions.",
+      "retraining_authorized": true,
+      "status": "eligible_to_retrain"
+    },
+    "insufficient_labels": {
+      "labeled_events_available": 10,
+      "labeled_events_required": 30,
+      "performance_evaluated": false,
+      "status": "insufficient_labels"
+    },
+    "stable_performance": {
+      "current_mae": 10.0,
+      "current_rmse": 10.0,
+      "degradation_threshold_rmse": 11.0,
+      "event_count": 30,
+      "performance_evaluated": true,
+      "reference_rmse": 10.0,
+      "relative_rmse_degradation_threshold": 0.1,
+      "status": "performance_stable"
+    }
+  },
+  "task_group": "TG2",
+  "validation": "passed"
+}
