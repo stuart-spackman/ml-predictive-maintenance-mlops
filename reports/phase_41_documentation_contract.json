@@ -1,0 +1,94 @@
+{
+  "phase": "4.1",
+  "task_group": "TG0",
+  "name": "Documentation Contract and Technical Story Map",
+
+  "documentation_goal": {
+    "primary": "Make the project understandable, defensible, and technically inspectable without requiring the reader to reconstruct the project from source code.",
+    "portfolio_first": true,
+    "technical_depth_available": true
+  },
+
+  "audiences": {
+    "recruiter_or_hiring_manager": {
+      "initial_goal": "Understand the problem, scope, technologies, and project outcome quickly."
+    },
+    "ml_or_software_engineer": {
+      "initial_goal": "Understand methodology, architecture, software quality, and MLOps lifecycle."
+    },
+    "technical_interviewer": {
+      "initial_goal": "Trace important engineering decisions to concrete evidence and implementation."
+    }
+  },
+
+  "progressive_disclosure": {
+    "first_15_seconds": [
+      "problem",
+      "project scope",
+      "core stack",
+      "high-level result"
+    ],
+    "first_60_seconds": [
+      "end-to-end architecture",
+      "modeling approach",
+      "serving capability",
+      "MLOps capabilities"
+    ],
+    "deep_dive": [
+      "data methodology",
+      "feature engineering",
+      "evaluation",
+      "model experimentation",
+      "API",
+      "testing",
+      "containerization",
+      "CI",
+      "model lifecycle",
+      "monitoring",
+      "retraining",
+      "limitations",
+      "reproduction"
+    ]
+  },
+
+  "technical_story": [
+    "problem",
+    "causal data and evaluation boundaries",
+    "feature engineering",
+    "model development",
+    "production inference",
+    "API serving",
+    "testing and CI",
+    "model governance",
+    "monitoring",
+    "delayed-label performance",
+    "retraining strategy",
+    "limitations"
+  ],
+
+  "claim_policy": {
+    "claims_must_be_supported_by_project_evidence": true,
+    "distinguish_implemented_capability_from_real_production_event": true,
+    "distinguish_registry_state_from_actual_serving_state": true,
+    "distinguish_experimental_candidate_from_deployed_model": true,
+    "distinguish_drift_from_performance_degradation": true,
+    "distinguish_retraining_simulation_from_real_retraining": true
+  },
+
+  "prohibited_overclaims": [
+    "operated against a live industrial fleet",
+    "observed real production model degradation",
+    "automatically retrained a production model",
+    "deployed a retrained model in response to real production degradation",
+    "registry champion necessarily equals the actually served FastAPI model"
+  ],
+
+  "style": {
+    "lead_with_outcomes_not_file_names": true,
+    "prefer_diagrams_over_long_architecture_prose": true,
+    "use_concrete_metrics_where_verified": true,
+    "explain_why_not_only_what": true,
+    "avoid_unnecessary_mlop_platform_jargon": true,
+    "keep_main_readme_scannable": true
+  }
+}
